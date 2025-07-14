@@ -87,8 +87,8 @@ const HomePage = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 animate-slide-up">
-              Join thousands of students, homemakers, and professionals who've discovered 
-              the path to financial independence through our expert-led masterclasses.
+              Join thousands who've discovered the path to financial independence 
+              through our expert-led masterclasses.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
               <Button size="lg" variant="glass" asChild className="text-lg px-8 py-6">
@@ -101,6 +101,16 @@ const HomePage = () => {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent"></div>
+        
+        {/* Sticky Join Community Button */}
+        <div className="fixed bottom-6 right-6 z-40">
+          <Button size="lg" variant="hero" asChild className="shadow-elegant animate-pulse">
+            <Link to="/masterclass">
+              Join Our Community
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
       </section>
 
       {/* Benefits Section */}

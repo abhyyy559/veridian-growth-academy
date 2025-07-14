@@ -24,8 +24,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 text-xl font-bold">
-            <GraduationCap className="h-8 w-8 text-primary" />
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="text-foreground font-black text-2xl">
               Veredian Growth
             </span>
           </Link>

@@ -11,12 +11,21 @@ import {
   TrendingUp, 
   Award, 
   ArrowRight,
-  Tag
+  Tag,
+  User,
+  Mail,
+  Phone
 } from "lucide-react";
 
 const Masterclass = () => {
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [currentStep, setCurrentStep] = useState<'register' | 'payment'>('register');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
 
   // Sample masterclass data (will be dynamic from Supabase later)
   const masterclasses = [
@@ -36,7 +45,7 @@ const Masterclass = () => {
     {
       id: 2,
       title: "Part-Time Earning Blueprint",
-      description: "Discover flexible income opportunities that work around your schedule. Ideal for students and working professionals.",
+      description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
       date: "2024-07-22",
       time: "7:00 PM IST",
       price: 1299,
@@ -85,6 +94,119 @@ const Masterclass = () => {
     }
     return originalPrice;
   };
+
+  const handleRegistration = (masterclassId: number) => {
+    if (formData.name && formData.email && formData.phone) {
+      setCurrentStep('payment');
+    }
+  };
+
+  const renderRegistrationForm = (masterclass: any) => (
+    <div className="space-y-4">
+      <h4 className="font-semibold text-lg">Registration Details</h4>
+      <div className="space-y-3">
+        <div className="relative">
+          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            className="pl-10"
+          />
+        </div>
+        <div className="relative">
+          <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            className="pl-10"
+          />
+        </div>
+        <div className="relative">
+          <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="tel"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            className="pl-10"
+          />
+        </div>
+      </div>
+      <Button 
+        className="w-full" 
+        size="lg" 
+        variant="hero"
+        onClick={() => handleRegistration(masterclass.id)}
+        disabled={!formData.name || !formData.email || !formData.phone}
+      >
+        Proceed to Payment
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Button>
+    </div>
+  );
+
+  const renderPaymentForm = (masterclass: any) => (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h4 className="font-semibold text-lg">Payment</h4>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => setCurrentStep('register')}
+        >
+          Back to Registration
+        </Button>
+      </div>
+      
+      {/* Coupon Section */}
+      <div className="border rounded-lg p-4 bg-muted/50">
+        <div className="flex items-center gap-2 mb-2">
+          <Tag className="h-4 w-4 text-accent" />
+          <span className="font-medium">Have a coupon code?</span>
+        </div>
+        <div className="flex gap-2">
+          <Input
+            placeholder="Enter coupon code"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
+            className="flex-1"
+          />
+          <Button 
+            variant="outline" 
+            onClick={() => applyCoupon(masterclass.id)}
+            disabled={!couponCode.trim()}
+          >
+            Apply
+          </Button>
+        </div>
+        {appliedCoupon && (
+          <div className="mt-2 text-sm text-accent">
+            ✓ Coupon applied! You saved ₹{masterclass.price - calculateDiscountedPrice(masterclass.price)}
+          </div>
+        )}
+      </div>
+
+      <div className="bg-accent/5 rounded-lg p-4">
+        <div className="flex justify-between items-center">
+          <span className="font-medium">Total Amount:</span>
+          <span className="text-2xl font-bold text-primary">
+            ₹{calculateDiscountedPrice(masterclass.price)}
+          </span>
+        </div>
+      </div>
+
+      <Button className="w-full" size="lg" variant="hero">
+        Pay Now - ₹{calculateDiscountedPrice(masterclass.price)}
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Button>
+      <p className="text-xs text-center text-muted-foreground">
+        Secure payment via Razorpay • Full refund if not satisfied
+      </p>
+    </div>
+  );
 
   return (
     <div className="min-h-screen pt-20">
@@ -158,43 +280,11 @@ const Masterclass = () => {
                     </div>
                   </div>
 
-                  {/* Coupon Section */}
-                  <div className="border rounded-lg p-4 bg-muted/50">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Tag className="h-4 w-4 text-accent" />
-                      <span className="font-medium">Have a coupon code?</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <Input
-                        placeholder="Enter coupon code"
-                        value={couponCode}
-                        onChange={(e) => setCouponCode(e.target.value)}
-                        className="flex-1"
-                      />
-                      <Button 
-                        variant="outline" 
-                        onClick={() => applyCoupon(masterclass.id)}
-                        disabled={!couponCode.trim()}
-                      >
-                        Apply
-                      </Button>
-                    </div>
-                    {appliedCoupon && (
-                      <div className="mt-2 text-sm text-accent">
-                        ✓ Coupon applied! You saved ₹{masterclass.price - calculateDiscountedPrice(masterclass.price)}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-3">
-                    <Button className="w-full" size="lg" variant="hero">
-                      Book Your Spot - ₹{calculateDiscountedPrice(masterclass.price)}
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                    <p className="text-xs text-center text-muted-foreground">
-                      Secure payment via Razorpay • Full refund if not satisfied
-                    </p>
-                  </div>
+                  {/* Registration/Payment Forms */}
+                  {currentStep === 'register' ? 
+                    renderRegistrationForm(masterclass) : 
+                    renderPaymentForm(masterclass)
+                  }
                 </CardContent>
               </Card>
             ))}
