@@ -27,7 +27,7 @@ const FAQ = () => {
     },
     {
       question: "What's the refund policy?",
-      answer: "We offer a 100% money-back guarantee if you're not satisfied with the masterclass content within 24 hours of completion. We're confident in the value we provide and want you to feel secure in your investment."
+      answer: "We will not provide any refund policy."
     },
     {
       question: "Do I need any special tools or software?",

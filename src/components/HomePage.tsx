@@ -148,8 +148,8 @@ const HomePage = () => {
         </div>
         
         {/* Sticky Join Community Button */}
-        <div className="fixed bottom-6 left-6 z-40">
-          <Button size="lg" className="bg-primary hover:bg-primary-dark text-white shadow-lg animate-pulse" asChild>
+        <div className="fixed bottom-8 right-8 z-40">
+          <Button size="lg" className="bg-primary hover:bg-primary-dark text-white shadow-lg transition-transform hover:scale-105" asChild>
             <Link to="/masterclass">
               Join Our Community
               <ArrowRight className="ml-2 h-5 w-5" />

@@ -227,10 +227,6 @@ const Masterclass = () => {
                 <Clock className="h-4 w-4 mr-2" />
                 Live Interaction
               </Badge>
-              <Badge variant="secondary" className="px-4 py-2">
-                <Award className="h-4 w-4 mr-2" />
-                Certificate Included
-              </Badge>
             </div>
           </div>
         </div>
@@ -335,9 +331,8 @@ const Masterclass = () => {
                 <h3 className="text-2xl font-bold mb-6 text-center">Important Notes</h3>
                 <div className="space-y-4 text-muted-foreground">
                   <p>• <strong>Limited Seats:</strong> Each masterclass is restricted to ensure quality interaction and personalized guidance.</p>
-                  <p>• <strong>Live Session:</strong> All masterclasses are conducted live. Recordings are provided for review.</p>
+                  <p>• <strong>Live Session:</strong> All masterclasses are conducted live.</p>
                   <p>• <strong>Interactive Format:</strong> Ask questions, get personalized advice, and connect with like-minded individuals.</p>
-                  <p>• <strong>Money-Back Guarantee:</strong> If you're not satisfied with the content, we offer a full refund within 24 hours.</p>
                   <p>• <strong>Follow-up Support:</strong> Get access to our community group for continued support and networking.</p>
                 </div>
               </CardContent>

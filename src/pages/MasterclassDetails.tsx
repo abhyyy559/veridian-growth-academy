@@ -60,7 +60,6 @@ const MasterclassDetails = () => {
         "Downloadable resources pack",
         "30-day follow-up support",
         "Access to private community group",
-        "Certificate of completion"
       ],
       agenda: [
         { time: "6:00-6:30 PM", topic: "Welcome & Success Stories" },
@@ -97,8 +96,7 @@ const MasterclassDetails = () => {
         "Professional toolkit",
         "Time management templates",
         "60-day email support",
-        "LinkedIn networking guide",
-        "Industry certification"
+        "LinkedIn networking guide"
       ],
       agenda: [
         { time: "7:00-7:20 PM", topic: "Introduction & Assessment" },
@@ -352,7 +350,6 @@ const MasterclassDetails = () => {
         </div>
         <div className="flex items-center gap-2">
           <CheckCircle className="h-4 w-4 text-green-500" />
-          <span>Certificate of completion</span>
         </div>
       </div>
 
