@@ -66,8 +66,9 @@ const TermsConditions = () => {
             </p>
             <h3 className="font-bold mb-2">Refund Policy:</h3>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li>In any case refund will not be provided</li>
+              <li>Full refund available within 24 hours of masterclass completion if not satisfied</li>
               <li>No refunds for no-shows or failure to attend scheduled sessions</li>
+              <li>Refund requests must be submitted in writing with valid reasons</li>
             </ul>
           </section>
 

@@ -43,7 +43,7 @@ const MasterclassDetails = () => {
       duration: "3 hours",
       price: 999,
       originalPrice: 1999,
-      slots: 25,
+      spots: 25,
       instructor: "Rahul Sharma",
       rating: 4.9,
       reviews: 150,
@@ -81,7 +81,7 @@ const MasterclassDetails = () => {
       duration: "2.5 hours",
       price: 1299,
       originalPrice: 2499,
-      slots: 30,
+      spots: 30,
       instructor: "Priya Verma",
       rating: 4.8,
       reviews: 200,
@@ -136,7 +136,7 @@ const MasterclassDetails = () => {
       <div className="text-center space-y-4">
         <div className="flex items-center justify-center gap-2 mb-2">
           <Badge variant="outline" className="bg-primary/10 text-primary">
-            {masterclass.slots} slots left
+            {masterclass.spots} spots left
           </Badge>
           <Badge variant="outline" className="bg-yellow-100 text-yellow-800">
             ⭐ {masterclass.rating} ({masterclass.reviews} reviews)
@@ -174,7 +174,7 @@ const MasterclassDetails = () => {
           <CardContent className="p-6">
             <Users className="h-8 w-8 text-primary mx-auto mb-2" />
             <div className="font-semibold">Limited Seats</div>
-            <div className="text-sm text-gray-600">Only {masterclass.slots} slots available</div>
+            <div className="text-sm text-gray-600">Only {masterclass.spots} spots available</div>
           </CardContent>
         </Card>
       </div>
@@ -252,7 +252,7 @@ const MasterclassDetails = () => {
           <ArrowRight className="ml-2 h-6 w-6" />
         </Button>
         <p className="text-sm text-gray-600 mt-2">
-          No payment required to register • Secure your slot now
+          No payment required to register • Secure your spot now
         </p>
       </div>
     </div>
@@ -261,7 +261,7 @@ const MasterclassDetails = () => {
   const renderRegistrationForm = () => (
     <div className="max-w-md mx-auto space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2">Secure Your Slot</h2>
+        <h2 className="text-2xl font-bold mb-2">Secure Your Spot</h2>
         <p className="text-gray-600">Just a few details to get started</p>
       </div>
       
