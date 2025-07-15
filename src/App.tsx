@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import HomePage from "@/components/HomePage";
 import About from "./pages/About";
 import Masterclass from "./pages/Masterclass";
+import MasterclassDetails from "./pages/MasterclassDetails";
 import Roadmap from "./pages/Roadmap";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/masterclass" element={<Masterclass />} />
+            <Route path="/masterclass/:id" element={<MasterclassDetails />} />
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />

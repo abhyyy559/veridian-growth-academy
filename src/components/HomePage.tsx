@@ -76,35 +76,80 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="hero-gradient pt-20 pb-16 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Transform Your Future with
-              <span className="block bg-gradient-to-r from-white to-accent-light bg-clip-text text-transparent">
-                Income-Generating Skills
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90 animate-slide-up">
-              Join thousands who've discovered the path to financial independence 
-              through our expert-led masterclasses.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in">
-              <Button size="lg" variant="glass" asChild className="text-lg px-8 py-6">
-                <Link to="/masterclass">
-                  Join the Community
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+      <section className="pt-20 pb-16 relative overflow-hidden bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                Turn Your{" "}
+                <span className="text-primary">Free Time</span>
+                <br />
+                Into
+                <br />
+                Part-Time Income
+              </h1>
+              <p className="text-lg text-gray-600 max-w-lg">
+                Discover proven income opportunities through social media marketing,
+                networking, and digital sales. Connect with mentors who guide you to real
+                earning potential.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="bg-primary hover:bg-primary-dark text-white px-8 py-3" asChild>
+                  <Link to="/masterclass">
+                    Start Earning Today
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="px-8 py-3">
+                  Learn More
+                </Button>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 text-white relative overflow-hidden">
+                <div className="absolute top-4 right-4">
+                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
+                    ⚡ Start Earning
+                  </div>
+                </div>
+                <div className="mt-8">
+                  <div className="text-6xl font-bold mb-2">↗</div>
+                  <div className="space-y-2">
+                    <div className="w-12 h-1 bg-primary-light rounded"></div>
+                    <div className="w-8 h-1 bg-primary-light/70 rounded"></div>
+                    <div className="w-16 h-1 bg-primary-light/50 rounded"></div>
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
+                    📈 Proven System
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent"></div>
+
+        {/* Stats Section */}
+        <div className="container mx-auto px-4 mt-16">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-primary">1000+</div>
+              <div className="text-gray-600">Active Members</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-primary">₹50k+</div>
+              <div className="text-gray-600">Avg Monthly Earnings</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-primary">95%</div>
+              <div className="text-gray-600">Success Rate</div>
+            </div>
+          </div>
+        </div>
         
         {/* Sticky Join Community Button */}
-        <div className="fixed bottom-6 right-6 z-40">
-          <Button size="lg" variant="hero" asChild className="shadow-elegant animate-pulse">
+        <div className="fixed bottom-6 left-6 z-40">
+          <Button size="lg" className="bg-primary hover:bg-primary-dark text-white shadow-lg animate-pulse" asChild>
             <Link to="/masterclass">
               Join Our Community
               <ArrowRight className="ml-2 h-5 w-5" />

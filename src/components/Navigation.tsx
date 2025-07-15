@@ -19,12 +19,15 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-effect border-b border-white/10">
+    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 text-xl font-bold">
-            <span className="text-foreground font-black text-2xl">
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">V</span>
+            </div>
+            <span className="text-foreground font-bold text-xl">
               Veredian Growth
             </span>
           </Link>
@@ -35,17 +38,17 @@ const Navigation = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-medium transition-colors px-3 py-2 rounded-md ${
                   isActive(item.path)
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
+                    ? "text-primary bg-primary/10"
+                    : "text-gray-600 hover:text-primary hover:bg-gray-100"
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <Button variant="hero" size="sm" asChild>
-              <Link to="/masterclass">Join Now</Link>
+            <Button variant="default" size="sm" className="bg-primary hover:bg-primary-dark text-white" asChild>
+              <Link to="/masterclass">Join Masterclass</Link>
             </Button>
           </div>
 

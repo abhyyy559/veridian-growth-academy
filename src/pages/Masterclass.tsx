@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,8 +36,6 @@ const Masterclass = () => {
       description: "Learn proven strategies to generate ₹25,000+ monthly income through digital platforms. Perfect for beginners with zero experience.",
       date: "2024-07-20",
       time: "6:00 PM IST",
-      price: 999,
-      originalPrice: 1999,
       paymentLink: "#",
       image: "/api/placeholder/400/250",
       spots: 25,
@@ -48,8 +47,6 @@ const Masterclass = () => {
       description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
       date: "2024-07-22",
       time: "7:00 PM IST",
-      price: 1299,
-      originalPrice: 2499,
       paymentLink: "#",
       image: "/api/placeholder/400/250",
       spots: 30,
@@ -247,17 +244,12 @@ const Masterclass = () => {
               <Card key={masterclass.id} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
                 <CardHeader>
                   <div className="flex justify-between items-start mb-4">
-                    <Badge variant="outline" className="bg-accent/10 text-accent">
+                    <Badge variant="outline" className="bg-primary/10 text-primary">
                       {masterclass.spots} spots left
                     </Badge>
-                    <div className="text-right">
-                      <div className="text-sm text-muted-foreground line-through">
-                        ₹{masterclass.originalPrice}
-                      </div>
-                      <div className="text-2xl font-bold text-primary">
-                        ₹{calculateDiscountedPrice(masterclass.price)}
-                      </div>
-                    </div>
+                    <Badge className="bg-green-100 text-green-800">
+                      FREE Registration
+                    </Badge>
                   </div>
                   <CardTitle className="text-2xl">{masterclass.title}</CardTitle>
                 </CardHeader>
@@ -280,11 +272,26 @@ const Masterclass = () => {
                     </div>
                   </div>
 
-                  {/* Registration/Payment Forms */}
-                  {currentStep === 'register' ? 
-                    renderRegistrationForm(masterclass) : 
-                    renderPaymentForm(masterclass)
-                  }
+                  <div className="flex gap-4">
+                    <Button 
+                      variant="outline" 
+                      className="flex-1"
+                      asChild
+                    >
+                      <Link to={`/masterclass/${masterclass.id}`}>
+                        Learn More
+                      </Link>
+                    </Button>
+                    <Button 
+                      className="flex-1 bg-primary hover:bg-primary-dark text-white"
+                      asChild
+                    >
+                      <Link to={`/masterclass/${masterclass.id}`}>
+                        Register Free
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
