@@ -31,8 +31,8 @@ const Roadmap = () => {
       step: 2,
       icon: Calendar,
       title: "Book",
-      subtitle: "Reserve Your Spot",
-      description: "Secure your seat in the masterclass of your choice. With limited spots available, early booking ensures you don't miss out.",
+      subtitle: "Reserve Your Slot",
+      description: "Secure your seat in the masterclass of your choice. With limited slots available, early booking ensures you don't miss out.",
       duration: "2-3 minutes",
       features: [
         "Choose your preferred date and time",

@@ -67,7 +67,7 @@ const HomePage = () => {
 
   const roadmapSteps = [
     { icon: Target, title: "Discover", description: "Learn about income opportunities" },
-    { icon: GraduationCap, title: "Book", description: "Reserve your masterclass spot" },
+    { icon: GraduationCap, title: "Book", description: "Reserve your masterclass slot" },
     { icon: Users, title: "Attend", description: "Join live mentorship sessions" },
     { icon: TrendingUp, title: "Learn", description: "Master proven techniques" },
     { icon: Award, title: "Earn", description: "Start generating income" }
@@ -260,14 +260,14 @@ const HomePage = () => {
       <section className="py-16 bg-background border-t">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Spots for This Week's Mentorship Are Open
+            Slots for This Week's Mentorship Are Open
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Limited seats available. Don't miss your chance to transform your financial future.
           </p>
           <Button size="lg" variant="hero" asChild className="text-xl px-12 py-6">
             <Link to="/masterclass">
-              Book Your Spot Now
+              Book Your Slot Now
               <ArrowRight className="ml-2 h-6 w-6" />
             </Link>
           </Button>

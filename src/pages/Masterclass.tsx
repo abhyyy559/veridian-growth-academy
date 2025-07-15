@@ -38,7 +38,7 @@ const Masterclass = () => {
       time: "6:00 PM IST",
       paymentLink: "#",
       image: "/api/placeholder/400/250",
-      spots: 25,
+      slots: 25,
       active: true
     },
     {
@@ -49,7 +49,7 @@ const Masterclass = () => {
       time: "7:00 PM IST",
       paymentLink: "#",
       image: "/api/placeholder/400/250",
-      spots: 30,
+      slots: 30,
       active: true
     }
   ];
@@ -245,7 +245,7 @@ const Masterclass = () => {
                 <CardHeader>
                   <div className="flex justify-between items-start mb-4">
                     <Badge variant="outline" className="bg-primary/10 text-primary">
-                      {masterclass.spots} spots left
+                      {masterclass.slots} slots left
                     </Badge>
                     <Badge className="bg-green-100 text-green-800">
                       FREE Registration
