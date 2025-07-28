@@ -105,24 +105,70 @@ const HomePage = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 text-white relative overflow-hidden">
-                <div className="absolute top-4 right-4">
-                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
-                    ⚡ Start Earning
+              <div className="hero-gradient rounded-2xl p-8 text-white relative overflow-hidden animate-glow">
+                {/* Floating Money Symbols */}
+                <div className="absolute top-2 left-6 animate-float" style={{animationDelay: '0s'}}>
+                  <div className="text-2xl opacity-20">₹</div>
+                </div>
+                <div className="absolute top-8 right-8 animate-float" style={{animationDelay: '1s'}}>
+                  <div className="text-xl opacity-30">💰</div>
+                </div>
+                <div className="absolute bottom-16 right-6 animate-float" style={{animationDelay: '2s'}}>
+                  <div className="text-lg opacity-25">💸</div>
+                </div>
+                
+                {/* Main Growth Arrow */}
+                <div className="relative z-10">
+                  <div className="absolute top-4 right-4">
+                    <div className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
+                      ⚡ Start Earning
+                    </div>
+                  </div>
+                  
+                  {/* Animated Growth Chart */}
+                  <div className="mt-8 space-y-4">
+                    <div className="text-5xl font-bold mb-4 gradient-animate bg-gradient-to-r from-white to-primary-light bg-clip-text text-transparent">
+                      📈
+                    </div>
+                    
+                    {/* Animated Progress Bars */}
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <div className="text-xs text-white/80">Month 1</div>
+                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-primary-light to-white rounded-full animate-[slide-in-right_1.5s_ease-out]" style={{width: '30%'}}></div>
+                        </div>
+                        <div className="text-xs text-white font-medium">₹15k</div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div className="text-xs text-white/80">Month 2</div>
+                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-primary-light to-white rounded-full animate-[slide-in-right_2s_ease-out]" style={{width: '60%'}}></div>
+                        </div>
+                        <div className="text-xs text-white font-medium">₹35k</div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div className="text-xs text-white/80">Month 3</div>
+                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-primary-light to-white rounded-full animate-[slide-in-right_2.5s_ease-out]" style={{width: '90%'}}></div>
+                        </div>
+                        <div className="text-xs text-white font-medium">₹50k+</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-4 left-4">
+                    <div className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse" style={{animationDelay: '1s'}}>
+                      🚀 Proven System
+                    </div>
                   </div>
                 </div>
-                <div className="mt-8">
-                  <div className="text-6xl font-bold mb-2">↗</div>
-                  <div className="space-y-2">
-                    <div className="w-12 h-1 bg-primary-light rounded"></div>
-                    <div className="w-8 h-1 bg-primary-light/70 rounded"></div>
-                    <div className="w-16 h-1 bg-primary-light/50 rounded"></div>
-                  </div>
-                </div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
-                    📈 Proven System
-                  </div>
+                
+                {/* Background Animation Elements */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-white rounded-full animate-ping"></div>
+                  <div className="absolute top-3/4 left-3/4 w-6 h-6 bg-white rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+                  <div className="absolute top-1/2 right-1/4 w-3 h-3 bg-white rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
                 </div>
               </div>
             </div>
