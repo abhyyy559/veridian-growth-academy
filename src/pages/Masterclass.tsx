@@ -28,29 +28,28 @@ const Masterclass = () => {
     phone: ''
   });
 
-  // Sample masterclass data (will be dynamic from Supabase later)
+  // Single masterclass as per user details
   const masterclasses = [
     {
       id: 1,
-      title: "Digital Income Mastery",
-      description: "Learn proven strategies to generate ₹25,000+ monthly income through digital platforms. Perfect for beginners with zero experience.",
-      date: "2024-07-20",
-      time: "6:00 PM IST",
+      title: "Unlock Your Income Potential: 6-Day Live Masterclass",
+      description: "A transformational 6-day, 100% live masterclass for anyone ready to start earning online — even with zero experience. Just 90 minutes a day, packed with clarity, action, and real results.",
+      date: "2025-08-01",
+      time: "7:00 PM – 8:30 PM (IST)",
       paymentLink: "#",
       image: "/api/placeholder/400/250",
-      slots: 25,
-      active: true
-    },
-    {
-      id: 2,
-      title: "Part-Time Earning Blueprint",
-      description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
-      date: "2024-07-22",
-      time: "7:00 PM IST",
-      paymentLink: "#",
-      image: "/api/placeholder/400/250",
-      slots: 30,
-      active: true
+      slots: 50,
+      active: true,
+      price: 200,
+      highlights: [
+        "6 days, 90 minutes each — live on Zoom",
+        "No experience or degree needed",
+        "Step-by-step earning roadmap",
+        "Find your hidden income potential",
+        "Action plan by Day 6 — not just theory!",
+        "Perfect for beginners, job seekers, or anyone feeling stuck"
+      ],
+      bonus: "Leave with a real earning strategy by Day 6!"
     }
   ];
 
@@ -235,61 +234,32 @@ const Masterclass = () => {
       {/* Masterclass List */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="max-w-xl mx-auto">
             {masterclasses.map((masterclass) => (
-              <Card key={masterclass.id} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-4">
-                    <Badge variant="outline" className="bg-primary/10 text-primary">
-                      {masterclass.slots} slots left
-                    </Badge>
-                    <Badge className="bg-green-100 text-green-800">
-                      FREE Registration
-                    </Badge>
+              <div key={masterclass.id} className="bg-white border border-gray-200 rounded-2xl shadow-card hover:shadow-elegant transition-all duration-300 p-6 mb-8">
+                <CardHeader className="p-0 mb-4">
+                  <CardTitle className="text-2xl text-center mb-2">{masterclass.title}</CardTitle>
+                  <div className="flex justify-center items-center gap-4 text-sm text-muted-foreground mb-2">
+                    <Calendar className="h-4 w-4" />
+                    {new Date(masterclass.date).toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric' })}
+                    <Clock className="h-4 w-4 ml-4" />
+                    {masterclass.time}
                   </div>
-                  <CardTitle className="text-2xl">{masterclass.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-muted-foreground">{masterclass.description}</p>
-                  
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(masterclass.date).toLocaleDateString('en-IN', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      {masterclass.time}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button 
-                      variant="outline" 
-                      className="flex-1"
-                      asChild
-                    >
-                      <Link to={`/masterclass/${masterclass.id}`}>
-                        Learn More
-                      </Link>
-                    </Button>
-                    <Button 
-                      className="flex-1 bg-primary hover:bg-primary-dark text-white"
-                      asChild
-                    >
-                      <Link to={`/masterclass/${masterclass.id}`}>
-                        Register Free
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </div>
+                <CardContent className="space-y-4 p-0">
+                  <ul className="list-disc list-inside text-muted-foreground text-base space-y-1 mb-2">
+                    {masterclass.highlights && masterclass.highlights.map((h, i) => (
+                      <li key={i}>{h}</li>
+                    ))}
+                  </ul>
+                  <Button className="w-full bg-primary hover:bg-primary-dark text-white text-base py-3" asChild>
+                    <Link to={`/masterclass/${masterclass.id}`}>
+                      Register Now
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </CardContent>
-              </Card>
+              </div>
             ))}
           </div>
         </div>

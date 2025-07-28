@@ -1,6 +1,33 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+// Custom animated counter hook
+function useAnimatedCount(end: number, duration: number, options?: { prefix?: string; suffix?: string; separator?: string }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const totalFrames = Math.round(duration * 60);
+    let frame = 0;
+    const step = () => {
+      frame++;
+      const progress = Math.min(frame / totalFrames, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setCount(end);
+      }
+    };
+    step();
+    // eslint-disable-next-line
+  }, [end, duration]);
+  let display = count.toLocaleString();
+  if (options?.prefix) display = options.prefix + display;
+  if (options?.suffix) display = display + options.suffix;
+  return display;
+}
 import { 
   Users, 
   Clock, 
@@ -77,23 +104,42 @@ const HomePage = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-20 pb-16 relative overflow-hidden bg-gray-50">
-        <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="container mx-auto px-4"
+        >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                Turn Your{" "}
-                <span className="text-primary">Free Time</span>
+              <motion.h1
+                className="text-4xl md:text-6xl font-bold leading-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Turn Your <span className="text-primary">Free Time</span>
                 <br />
                 Into
                 <br />
-                Part-Time Income
-              </h1>
-              <p className="text-lg text-gray-600 max-w-lg">
+                <span className="inline-block">Part-Time Income</span>
+              </motion.h1>
+              <motion.p
+                className="text-lg text-gray-600 max-w-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 0.2 }}
+              >
                 Discover proven income opportunities through social media marketing,
                 networking, and digital sales. Connect with mentors who guide you to real
                 earning potential.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              </motion.p>
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
                 <Button size="lg" className="bg-primary hover:bg-primary-dark text-white px-8 py-3" asChild>
                   <Link to="/masterclass">
                     Start Earning Today
@@ -102,46 +148,136 @@ const HomePage = () => {
                 <Button size="lg" variant="outline" className="px-8 py-3">
                   Learn More
                 </Button>
-              </div>
+              </motion.div>
             </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 text-white relative overflow-hidden">
-                <div className="absolute top-4 right-4">
-                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
-                    ⚡ Start Earning
-                  </div>
-                </div>
-                <div className="mt-8">
-                  <div className="text-6xl font-bold mb-2">↗</div>
-                  <div className="space-y-2">
-                    <div className="w-12 h-1 bg-primary-light rounded"></div>
-                    <div className="w-8 h-1 bg-primary-light/70 rounded"></div>
-                    <div className="w-16 h-1 bg-primary-light/50 rounded"></div>
-                  </div>
-                </div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="bg-primary-light text-primary-dark px-3 py-1 rounded-full text-sm font-medium">
-                    📈 Proven System
-                  </div>
-                </div>
-              </div>
+            <div className="relative flex items-center justify-center min-h-[340px]">
+              {/* Premium animated hero illustration */}
+              <motion.div
+                className="relative w-full h-[340px] flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+              >
+                {/* Glowing animated background */}
+                <motion.div
+                  className="absolute w-72 h-72 bg-gradient-to-br from-primary/40 to-primary-dark/60 rounded-full blur-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+                  animate={{ scale: [1, 1.08, 1], opacity: [0.7, 1, 0.7] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                />
+                {/* Floating coins */}
+                {[...Array(4)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute z-10"
+                    style={{
+                      left: `${20 + i * 18}%`,
+                      top: `${18 + (i % 2) * 40}%`,
+                    }}
+                    animate={{
+                      y: [0, -18 + i * 6, 0],
+                      rotate: [0, 12 * (i % 2 === 0 ? 1 : -1), 0],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 3.5 + i,
+                      delay: i * 0.5,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="19" cy="19" r="18" fill="#FFD700" stroke="#FBBF24" strokeWidth="2" />
+                      <text x="50%" y="54%" textAnchor="middle" fill="#fff" fontSize="18" fontWeight="bold" dy=".3em">₹</text>
+                    </svg>
+                  </motion.div>
+                ))}
+                {/* Sparkles */}
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute z-20"
+                    style={{
+                      left: `${10 + i * 13}%`,
+                      top: `${10 + (i % 3) * 30}%`,
+                    }}
+                    animate={{
+                      scale: [1, 1.4, 1],
+                      opacity: [0.7, 1, 0.7],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2.2 + i * 0.3,
+                      delay: i * 0.2,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 0L10.7553 6.24472L17 8.00001L10.7553 9.75529L9 16L7.24472 9.75529L1 8.00001L7.24472 6.24472L9 0Z" fill="#fff" fillOpacity="0.7"/>
+                    </svg>
+                  </motion.div>
+                ))}
+                {/* Glowing animated arrow */}
+                <motion.div
+                  className="relative z-30 flex flex-col items-center"
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.8, type: "spring", bounce: 0.4 }}
+                >
+                  <motion.div
+                    className="text-[5rem] md:text-[6rem] font-bold text-primary drop-shadow-[0_0_32px_rgba(251,191,36,0.5)]"
+                    animate={{ scale: [1, 1.18, 1], textShadow: [
+                      "0 0 32px #FBBF24AA", "0 0 48px #FBBF24", "0 0 32px #FBBF24AA"
+                    ] }}
+                    transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                  >
+                    ↗
+                  </motion.div>
+                  <motion.div
+                    className="mt-2 flex flex-col items-center gap-1"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.7 }}
+                  >
+                    <div className="w-16 h-1 bg-primary rounded" />
+                    <div className="w-10 h-1 bg-primary/60 rounded" />
+                    <div className="w-20 h-1 bg-primary/30 rounded" />
+                  </motion.div>
+                  <motion.div
+                    className="mt-8"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.7 }}
+                  >
+                    <Button size="lg" className="bg-primary hover:bg-primary-dark text-white px-8 py-3 shadow-lg" asChild>
+                      <Link to="/masterclass">
+                        Start Now
+                      </Link>
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats Section */}
         <div className="container mx-auto px-4 mt-16">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-primary">1000+</div>
+              <div className="text-4xl font-bold text-primary">
+                {useAnimatedCount(1000, 2)}+
+              </div>
               <div className="text-gray-600">Active Members</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary">₹50k+</div>
+              <div className="text-4xl font-bold text-primary">
+                ₹{useAnimatedCount(50000, 2.5)}+
+              </div>
               <div className="text-gray-600">Avg Monthly Earnings</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary">95%</div>
+              <div className="text-4xl font-bold text-primary">
+                {useAnimatedCount(95, 2)}%
+              </div>
               <div className="text-gray-600">Success Rate</div>
             </div>
           </div>
@@ -171,15 +307,23 @@ const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300 hover:scale-105">
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                    <benefit.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="border-0 shadow-card hover:shadow-elegant transition-all duration-300 hover:scale-105 h-full">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                      <benefit.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                    <p className="text-muted-foreground">{benefit.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -196,23 +340,61 @@ const HomePage = () => {
               Real people, real results, real transformations.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-20%" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+          >
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground mb-4 italic">
-                    "{testimonial.quote}"
-                  </p>
-                  <p className="font-semibold text-primary">{testimonial.name}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+                whileHover={{ scale: 1.04, boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
+              >
+                <Card className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
+                  <CardContent className="p-6">
+                    <motion.div
+                      className="flex items-center mb-4 justify-center"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                    >
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </motion.div>
+                    <motion.p
+                      className="text-muted-foreground mb-4 italic"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    >
+                      "{testimonial.quote}"
+                    </motion.p>
+                    <motion.p
+                      className="font-semibold text-primary"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                    >
+                      {testimonial.name}
+                    </motion.p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="text-center mt-8">
             <Button variant="accent" size="lg" asChild>
               <Link to="/masterclass">Join Them Today</Link>
@@ -233,9 +415,29 @@ const HomePage = () => {
             </p>
           </div>
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-4">
+            <motion.div
+              className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-20%" }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.18
+                  }
+                }
+              }}
+            >
               {roadmapSteps.map((step, index) => (
-                <div key={index} className="flex flex-col items-center text-center group">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+                  whileHover={{ scale: 1.07, boxShadow: "0 8px 32px rgba(0,0,0,0.10)" }}
+                  className="flex flex-col items-center text-center group relative"
+                >
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <step.icon className="h-10 w-10 text-primary" />
                   </div>
@@ -244,9 +446,9 @@ const HomePage = () => {
                   {index < roadmapSteps.length - 1 && (
                     <ArrowRight className="hidden md:block h-6 w-6 text-muted-foreground mt-4 absolute translate-x-16" />
                   )}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           <div className="text-center mt-12">
             <Button variant="outline" size="lg" asChild>

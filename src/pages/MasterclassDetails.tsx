@@ -30,84 +30,57 @@ const MasterclassDetails = () => {
     phone: ''
   });
 
-  // Sample masterclass data - in real app this would come from API
-  const masterclassData = {
-    1: {
-      id: 1,
-      title: "Digital Income Mastery",
-      subtitle: "From Zero to ₹25,000+ Monthly Income",
-      description: "Learn proven strategies to generate consistent monthly income through digital platforms. Perfect for beginners with zero experience.",
-      detailedDescription: "This comprehensive masterclass will teach you everything you need to know about generating income online. We cover social media marketing, affiliate marketing, digital products, and networking strategies that actually work.",
-      date: "2024-07-20",
-      time: "6:00 PM IST",
-      duration: "3 hours",
-      price: 999,
-      originalPrice: 1999,
-      slots: 25,
-      instructor: "Rahul Sharma",
-      rating: 4.9,
-      reviews: 150,
-      learningOutcomes: [
-        "Master 5 proven income generation strategies",
-        "Set up your first digital income stream",
-        "Build a network of mentors and supporters",
-        "Create a sustainable part-time income plan",
-        "Access to exclusive resources and templates"
-      ],
-      whatYouGet: [
-        "3-hour live masterclass",
-        "Q&A session with experts",
-        "Downloadable resources pack",
-        "30-day follow-up support",
-        "Access to private community group",
-      ],
-      agenda: [
-        { time: "6:00-6:30 PM", topic: "Welcome & Success Stories" },
-        { time: "6:30-7:15 PM", topic: "5 Proven Income Strategies" },
-        { time: "7:15-7:30 PM", topic: "Break" },
-        { time: "7:30-8:15 PM", topic: "Implementation Roadmap" },
-        { time: "8:15-9:00 PM", topic: "Q&A & Next Steps" }
-      ]
-    },
-    2: {
-      id: 2,
-      title: "Part-Time Earning Blueprint",
-      subtitle: "Perfect for Working Professionals",
-      description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
-      detailedDescription: "Designed specifically for busy professionals who want to create additional income streams without leaving their day job. Learn time-efficient strategies that can be implemented in just 1-2 hours daily.",
-      date: "2024-07-22",
-      time: "7:00 PM IST",
-      duration: "2.5 hours",
-      price: 1299,
-      originalPrice: 2499,
-      slots: 30,
-      instructor: "Priya Verma",
-      rating: 4.8,
-      reviews: 200,
-      learningOutcomes: [
-        "Time-efficient income strategies",
-        "Work-life balance techniques",
-        "Automation tools and systems",
-        "Passive income fundamentals",
-        "Professional networking strategies"
-      ],
-      whatYouGet: [
-        "2.5-hour intensive session",
-        "Professional toolkit",
-        "Time management templates",
-        "60-day email support",
-        "LinkedIn networking guide"
-      ],
-      agenda: [
-        { time: "7:00-7:20 PM", topic: "Introduction & Assessment" },
-        { time: "7:20-8:00 PM", topic: "Time-Efficient Strategies" },
-        { time: "8:00-8:40 PM", topic: "Automation & Tools" },
-        { time: "8:40-9:30 PM", topic: "Action Planning & Q&A" }
-      ]
-    }
+  // Transaction ID state for manual confirmation
+  const [showTxnForm, setShowTxnForm] = useState(false);
+  const [txnId, setTxnId] = useState('');
+
+  // Payment handler
+  const handleUPIPayment = () => {
+    // UPI link
+    const upiLink = `upi://pay?pa=9652702916@ybl&pn=Payment+Receiver&am=${masterclass.price}&cu=INR`;
+    window.open(upiLink, '_blank');
+    // Show transaction ID form after payment
+    setShowTxnForm(true);
   };
 
-  const masterclass = masterclassData[parseInt(id as string) as keyof typeof masterclassData];
+
+  // Single masterclass data as per user details
+  const masterclass = {
+    id: 1,
+    title: "Unlock Your Income Potential – 6 Days, 90 Minutes a Day",
+    subtitle: "Start earning online with a simple, proven plan — no experience needed.",
+    description: "A practical 6-day live masterclass to help you start earning online, even if you have no prior experience. Learn proven digital income strategies, get a clear step-by-step roadmap, and leave with an actionable plan in just 90 minutes a day.",
+    detailedDescription: `Join this 6-day live masterclass (90 minutes/day) and discover:\n- The easiest digital income paths for beginners\n- How to find your earning potential and take action\n- A simple, proven framework to start making money online\n\nNo experience or special skills needed—just a willingness to learn. Limited seats. Register now to secure your spot!`,
+    date: "2025-08-01",
+    time: "7:00 PM to 8:30 PM (IST)",
+    duration: "6 Days (90 min/day)",
+    price: 200,
+    originalPrice: 499,
+    slots: 50,
+    instructor: "Your Name",
+    rating: 5.0,
+    reviews: 100,
+    learningOutcomes: [
+      "Beginner-friendly digital income paths",
+      "Day-by-day roadmap for clarity and action",
+      "Identify hidden earning potential in your daily life",
+      "Framework to start generating income online",
+      "Consistency and growth with limited time/resources"
+    ],
+    whatYouGet: [
+      "6-day live masterclass (Zoom)",
+      "90 minutes per day, 100% live",
+      "Actionable earning strategy by Day 6"
+    ],
+    agenda: [
+      { time: "Day 1", topic: "Clarity & Mindset for Earning" },
+      { time: "Day 2", topic: "Digital Income Paths Overview" },
+      { time: "Day 3", topic: "Finding Your Earning Niche" },
+      { time: "Day 4", topic: "Building Your First Income Stream" },
+      { time: "Day 5", topic: "Scaling & Consistency" },
+      { time: "Day 6", topic: "Action Plan & Q&A" }
+    ]
+  };
 
   if (!masterclass) {
     return (
@@ -353,13 +326,41 @@ const MasterclassDetails = () => {
         </div>
       </div>
 
-      <Button 
-        className="w-full bg-primary hover:bg-primary-dark text-white" 
-        size="lg"
-      >
-        Pay ₹{masterclass.price} & Join Now
-        <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+
+      {!showTxnForm && (
+        <Button 
+          className="w-full bg-primary hover:bg-primary-dark text-white" 
+          size="lg"
+          onClick={handleUPIPayment}
+        >
+          Pay ₹{masterclass.price} via UPI & Join Now
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      )}
+
+      {showTxnForm && (
+        <div className="mt-6 p-4 border rounded bg-gray-50">
+          <h3 className="text-lg font-semibold mb-2">After payment, enter your UPI Transaction/Reference ID below:</h3>
+          <input
+            type="text"
+            className="w-full p-2 border rounded mb-2"
+            placeholder="Enter UPI Transaction ID (UTR/TXN ID)"
+            value={txnId}
+            onChange={e => setTxnId(e.target.value)}
+          />
+          <Button
+            className="w-full bg-green-600 text-white"
+            size="lg"
+            disabled={!txnId}
+            onClick={() => {
+              window.location.href = '/paymentsuccess';
+            }}
+          >
+            Submit Transaction ID
+          </Button>
+          <p className="text-xs text-gray-500 mt-2">We will verify your payment and contact you soon.</p>
+        </div>
+      )}
       
       <Button 
         variant="ghost" 
@@ -371,7 +372,7 @@ const MasterclassDetails = () => {
       </Button>
 
       <p className="text-xs text-center text-gray-500">
-        Secure payment via Razorpay • Your data is protected
+        Secure payment via UPI • Enter your transaction ID after payment
       </p>
     </div>
   );
