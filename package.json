@@ -45,8 +45,10 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.3.0",
+    "framer-motion": "^12.23.9",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
+    "mongoose": "^8.16.5",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
@@ -79,5 +81,18 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "description": "**URL**: https://lovable.dev/projects/ab017beb-acba-4cc2-bac1-12a6c7f6eb88",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhyyy559/veridian-growth-academy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhyyy559/veridian-growth-academy/issues"
+  },
+  "homepage": "https://github.com/abhyyy559/veridian-growth-academy#readme"
 }
