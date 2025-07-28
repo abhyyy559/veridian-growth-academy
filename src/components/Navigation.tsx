@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X, GraduationCap, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -47,9 +55,37 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="default" size="sm" className="bg-primary hover:bg-primary-dark text-white" asChild>
-              <Link to="/masterclass">Join Masterclass</Link>
-            </Button>
+            
+            {user ? (
+              <>
+                <Button variant="default" size="sm" className="bg-primary hover:bg-primary-dark text-white" asChild>
+                  <Link to="/masterclass">Join Masterclass</Link>
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                      <User className="h-4 w-4" />
+                      <span className="text-sm">{user.email?.split('@')[0] || 'Account'}</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <>
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/auth">Sign In</Link>
+                </Button>
+                <Button variant="default" size="sm" className="bg-primary hover:bg-primary-dark text-white" asChild>
+                  <Link to="/masterclass">Join Masterclass</Link>
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -82,12 +118,38 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
-              <div className="px-3 py-2">
-                <Button variant="hero" size="sm" className="w-full" asChild>
-                  <Link to="/masterclass" onClick={() => setIsOpen(false)}>
-                    Join Now
-                  </Link>
-                </Button>
+              <div className="px-3 py-2 space-y-2">
+                {user ? (
+                  <>
+                    <Button variant="hero" size="sm" className="w-full" asChild>
+                      <Link to="/masterclass" onClick={() => setIsOpen(false)}>
+                        Join Masterclass
+                      </Link>
+                    </Button>
+                    <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                      <span className="text-sm text-muted-foreground">
+                        {user.email?.split('@')[0]}
+                      </span>
+                      <Button variant="ghost" size="sm" onClick={() => { signOut(); setIsOpen(false); }}>
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="outline" size="sm" className="w-full mb-2" asChild>
+                      <Link to="/auth" onClick={() => setIsOpen(false)}>
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button variant="hero" size="sm" className="w-full" asChild>
+                      <Link to="/masterclass" onClick={() => setIsOpen(false)}>
+                        Join Now
+                      </Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>
