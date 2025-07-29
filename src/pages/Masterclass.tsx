@@ -28,41 +28,29 @@ const Masterclass = () => {
     phone: ''
   });
 
-  // Single masterclass data with your new description
+  // Sample masterclass data (will be dynamic from Supabase later)
   const masterclasses = [
     {
       id: 1,
-      title: "Unlock Your Income Potential",
-      subtitle: "6 Days, 90 Minutes a Day",
-      description: "Start earning online with a simple, proven plan — no experience needed. Join this 6-day live masterclass (90 minutes/day) and discover the easiest digital income paths for beginners, how to find your earning potential and take action, and a simple, proven framework to start making money online. No experience or special skills needed—just a willingness to learn. Limited seats. Register now to secure your spot!",
-      date: "2025-08-01",
-      time: "7:00 PM to 8:30 PM (IST)",
-      duration: "6 Days (90 min/day)",
-      format: "Live Interactive Session",
+      title: "Digital Income Mastery",
+      description: "Learn proven strategies to generate ₹25,000+ monthly income through digital platforms. Perfect for beginners with zero experience.",
+      date: "2024-07-20",
+      time: "6:00 PM IST",
       paymentLink: "#",
       image: "/api/placeholder/400/250",
-      slots: 50,
-      active: true,
-      learningTopics: [
-        "Beginner-friendly digital income paths",
-        "Day-by-day roadmap for clarity and action", 
-        "Identify hidden earning potential in your daily life",
-        "Framework to start generating income online",
-        "Consistency and growth with limited time/resources"
-      ],
-      agenda: [
-        { day: "Day 1", topic: "Clarity & Mindset for Earning" },
-        { day: "Day 2", topic: "Digital Income Paths Overview" },
-        { day: "Day 3", topic: "Finding Your Earning Niche" },
-        { day: "Day 4", topic: "Building Your First Income Stream" },
-        { day: "Day 5", topic: "Scaling & Consistency" },
-        { day: "Day 6", topic: "Action Plan & Q&A" }
-      ],
-      included: [
-        "6-day live masterclass (Zoom)",
-        "90 minutes per day, 100% live",
-        "Actionable earning strategy by Day 6"
-      ]
+      slots: 25,
+      active: true
+    },
+    {
+      id: 2,
+      title: "Part-Time Earning Blueprint",
+      description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
+      date: "2024-07-22",
+      time: "7:00 PM IST",
+      paymentLink: "#",
+      image: "/api/placeholder/400/250",
+      slots: 30,
+      active: true
     }
   ];
 
@@ -244,135 +232,61 @@ const Masterclass = () => {
         </div>
       </section>
 
-      {/* Single Enhanced Masterclass Card */}
-      <section className="py-20 bg-background relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-primary rounded-full animate-float" style={{animationDelay: '0s'}}></div>
-          <div className="absolute bottom-20 left-20 w-48 h-48 bg-accent rounded-full animate-float" style={{animationDelay: '2s'}}></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
+      {/* Masterclass List */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {masterclasses.map((masterclass) => (
-              <Card key={masterclass.id} className="border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 bg-white/95 backdrop-blur-sm relative overflow-hidden group animate-scale-in">
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Decorative Elements */}
-                <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-xl group-hover:scale-110 transition-transform duration-500"></div>
-                
-                <CardHeader className="relative z-10 p-8">
-                  <div className="flex flex-wrap justify-between items-start mb-6 gap-4">
-                    <div className="flex flex-wrap gap-3">
-                      <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30 px-4 py-2 text-sm font-medium animate-pulse">
-                        <Users className="h-4 w-4 mr-1" />
-                        Only {masterclass.slots} slots left
-                      </Badge>
-                      <Badge className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 text-sm font-medium shadow-lg">
-                        ✨ FREE Registration
-                      </Badge>
-                      <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30 px-4 py-2 text-sm">
-                        <Clock className="h-4 w-4 mr-1" />
-                        {masterclass.duration}
-                      </Badge>
-                    </div>
+              <Card key={masterclass.id} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
+                <CardHeader>
+                  <div className="flex justify-between items-start mb-4">
+                    <Badge variant="outline" className="bg-primary/10 text-primary">
+                      {masterclass.slots} slots left
+                    </Badge>
+                    <Badge className="bg-green-100 text-green-800">
+                      FREE Registration
+                    </Badge>
                   </div>
-                  
-                  <div className="space-y-4">
-                    <CardTitle className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight">
-                      {masterclass.title}
-                    </CardTitle>
-                    <p className="text-xl text-primary font-semibold">{masterclass.subtitle}</p>
-                  </div>
+                  <CardTitle className="text-2xl">{masterclass.title}</CardTitle>
                 </CardHeader>
-
-                <CardContent className="space-y-8 p-8 relative z-10">
-                  <p className="text-lg text-muted-foreground leading-relaxed">{masterclass.description}</p>
+                <CardContent className="space-y-6">
+                  <p className="text-muted-foreground">{masterclass.description}</p>
                   
-                  {/* Enhanced Date and Time Info */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl">
-                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Calendar className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-lg">
-                          {new Date(masterclass.date).toLocaleDateString('en-IN', {
-                            weekday: 'long',
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </div>
-                        <div className="text-sm text-muted-foreground">{masterclass.time}</div>
-                      </div>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      {new Date(masterclass.date).toLocaleDateString('en-IN', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
                     </div>
-                    
-                    <div className="flex items-center gap-3 p-4 bg-accent/5 rounded-xl">
-                      <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
-                        <Users className="h-6 w-6 text-accent" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-lg">{masterclass.format}</div>
-                        <div className="text-sm text-muted-foreground">Interactive & Live</div>
-                      </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      {masterclass.time}
                     </div>
                   </div>
 
-                  {/* Learning Topics Preview */}
-                  {masterclass.learningTopics && (
-                    <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6">
-                      <h4 className="text-xl font-semibold mb-4 text-primary">What You'll Learn:</h4>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {masterclass.learningTopics.slice(0, 4).map((topic, index) => (
-                          <div key={index} className="flex items-start gap-2">
-                            <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                            <span className="text-muted-foreground">{topic}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Enhanced Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <div className="flex gap-4">
                     <Button 
                       variant="outline" 
-                      size="lg"
-                      className="flex-1 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300"
+                      className="flex-1"
                       asChild
                     >
                       <Link to={`/masterclass/${masterclass.id}`}>
-                        View Full Details
+                        Learn More
                       </Link>
                     </Button>
                     <Button 
-                      size="lg"
-                      className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-accent-dark text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                      className="flex-1 bg-primary hover:bg-primary-dark text-white"
                       asChild
                     >
                       <Link to={`/masterclass/${masterclass.id}`}>
-                        Register FREE Now
-                        <ArrowRight className="ml-2 h-5 w-5" />
+                        Register Free
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
-                  </div>
-
-                  {/* Trust Indicators */}
-                  <div className="flex flex-wrap justify-center gap-6 pt-6 border-t border-gray-100 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span>No experience needed</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span>100% Live & Interactive</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span>Action plan by Day 6</span>
-                    </div>
                   </div>
                 </CardContent>
               </Card>
