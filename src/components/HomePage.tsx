@@ -188,12 +188,71 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                {/* Enhanced Background Particles */}
-                <div className="absolute inset-0 opacity-30">
-                  <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-green-300 rounded-full animate-ping"></div>
-                  <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-green-200 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-                  <div className="absolute top-1/2 right-1/6 w-1.5 h-1.5 bg-white rounded-full animate-ping" style={{animationDelay: '2s'}}></div>
-                  <div className="absolute bottom-1/3 left-1/3 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping" style={{animationDelay: '3s'}}></div>
+                {/* Supabase Dashboard Features */}
+                <div className="absolute inset-0">
+                  {/* Database Status Indicators */}
+                  <div className="absolute top-6 right-6 flex flex-col space-y-2">
+                    <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-green-200 font-medium">Database Online</span>
+                    </div>
+                    <div className="bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                      <span className="text-xs text-blue-200 font-medium">Auth Active</span>
+                    </div>
+                    <div className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                      <span className="text-xs text-purple-200 font-medium">Realtime</span>
+                    </div>
+                  </div>
+
+                  {/* Supabase Logo Animation */}
+                  <div className="absolute top-8 left-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-full p-3 border border-white/20 animate-float">
+                      <svg className="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Real-time Data Stream */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm text-white/90 font-medium">⚡ Live Activity</span>
+                        <div className="flex space-x-1">
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse"></div>
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                          User registered • 2s ago
+                        </div>
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                          Profile updated • 5s ago
+                        </div>
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                          Data synced • 8s ago
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Code Snippets */}
+                  <div className="absolute top-1/3 right-8 animate-float bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/10 font-mono text-xs text-green-300" style={{animationDelay: '1s'}}>
+                    <div>supabase.auth</div>
+                    <div className="text-white/50">.signIn()</div>
+                  </div>
+                  
+                  <div className="absolute bottom-1/3 right-12 animate-float bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/10 font-mono text-xs text-blue-300" style={{animationDelay: '2s'}}>
+                    <div>supabase.from</div>
+                    <div className="text-white/50">('profiles')</div>
+                  </div>
                 </div>
               </div>
             </div>
