@@ -30,79 +30,52 @@ const MasterclassDetails = () => {
     phone: ''
   });
 
-  // Sample masterclass data - in real app this would come from API
+  // Updated masterclass data with your new content
   const masterclassData = {
     1: {
       id: 1,
-      title: "Digital Income Mastery",
-      subtitle: "From Zero to ₹25,000+ Monthly Income",
-      description: "Learn proven strategies to generate consistent monthly income through digital platforms. Perfect for beginners with zero experience.",
-      detailedDescription: "This comprehensive masterclass will teach you everything you need to know about generating income online. We cover social media marketing, affiliate marketing, digital products, and networking strategies that actually work.",
-      date: "2024-07-20",
-      time: "6:00 PM IST",
-      duration: "3 hours",
-      price: 999,
-      originalPrice: 1999,
-      slots: 25,
-      instructor: "Rahul Sharma",
+      title: "Unlock Your Income Potential",
+      subtitle: "6 Days, 90 Minutes a Day",
+      description: "Start earning online with a simple, proven plan — no experience needed.",
+      detailedDescription: "Join this 6-day live masterclass (90 minutes/day) and discover the easiest digital income paths for beginners. Learn how to find your earning potential and take action with a simple, proven framework to start making money online. No experience or special skills needed—just a willingness to learn. Limited seats available.",
+      date: "2025-08-01",
+      time: "7:00 PM to 8:30 PM (IST)",
+      duration: "6 Days (90 min/day)",
+      format: "Live Interactive Session",
+      price: 0, // FREE Registration
+      originalPrice: 2999,
+      slots: 50,
+      instructor: "Expert Mentors",
       rating: 4.9,
-      reviews: 150,
+      reviews: 500,
       learningOutcomes: [
-        "Master 5 proven income generation strategies",
-        "Set up your first digital income stream",
-        "Build a network of mentors and supporters",
-        "Create a sustainable part-time income plan",
-        "Access to exclusive resources and templates"
+        "Beginner-friendly digital income paths",
+        "Day-by-day roadmap for clarity and action",
+        "Identify hidden earning potential in your daily life",
+        "Framework to start generating income online",
+        "Consistency and growth with limited time/resources"
       ],
       whatYouGet: [
-        "3-hour live masterclass",
-        "Q&A session with experts",
-        "Downloadable resources pack",
-        "30-day follow-up support",
-        "Access to private community group",
+        "6-day live masterclass (Zoom)",
+        "90 minutes per day, 100% live",
+        "Actionable earning strategy by Day 6",
+        "Step-by-step earning roadmap",
+        "Find your hidden income potential",
+        "Action plan by Day 6 — not just theory!"
       ],
       agenda: [
-        { time: "6:00-6:30 PM", topic: "Welcome & Success Stories" },
-        { time: "6:30-7:15 PM", topic: "5 Proven Income Strategies" },
-        { time: "7:15-7:30 PM", topic: "Break" },
-        { time: "7:30-8:15 PM", topic: "Implementation Roadmap" },
-        { time: "8:15-9:00 PM", topic: "Q&A & Next Steps" }
-      ]
-    },
-    2: {
-      id: 2,
-      title: "Part-Time Earning Blueprint",
-      subtitle: "Perfect for Working Professionals",
-      description: "Discover flexible income opportunities that work around your schedule. Ideal for working professionals.",
-      detailedDescription: "Designed specifically for busy professionals who want to create additional income streams without leaving their day job. Learn time-efficient strategies that can be implemented in just 1-2 hours daily.",
-      date: "2024-07-22",
-      time: "7:00 PM IST",
-      duration: "2.5 hours",
-      price: 1299,
-      originalPrice: 2499,
-      slots: 30,
-      instructor: "Priya Verma",
-      rating: 4.8,
-      reviews: 200,
-      learningOutcomes: [
-        "Time-efficient income strategies",
-        "Work-life balance techniques",
-        "Automation tools and systems",
-        "Passive income fundamentals",
-        "Professional networking strategies"
+        { time: "Day 1", topic: "Clarity & Mindset for Earning" },
+        { time: "Day 2", topic: "Digital Income Paths Overview" },
+        { time: "Day 3", topic: "Finding Your Earning Niche" },
+        { time: "Day 4", topic: "Building Your First Income Stream" },
+        { time: "Day 5", topic: "Scaling & Consistency" },
+        { time: "Day 6", topic: "Action Plan & Q&A" }
       ],
-      whatYouGet: [
-        "2.5-hour intensive session",
-        "Professional toolkit",
-        "Time management templates",
-        "60-day email support",
-        "LinkedIn networking guide"
-      ],
-      agenda: [
-        { time: "7:00-7:20 PM", topic: "Introduction & Assessment" },
-        { time: "7:20-8:00 PM", topic: "Time-Efficient Strategies" },
-        { time: "8:00-8:40 PM", topic: "Automation & Tools" },
-        { time: "8:40-9:30 PM", topic: "Action Planning & Q&A" }
+      highlights: [
+        "Perfect for beginners, job seekers, or anyone feeling stuck",
+        "No experience or degree needed",
+        "100% live on Zoom",
+        "Only 50 slots available"
       ]
     }
   };

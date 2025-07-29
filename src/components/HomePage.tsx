@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { 
   Users, 
   Clock, 
@@ -10,10 +12,79 @@ import {
   ArrowRight,
   Target,
   TrendingUp,
-  Award
+  Award,
+  Loader2
 } from "lucide-react";
 
 const HomePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  // Simulate loading animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    const progressTimer = setInterval(() => {
+      setLoadingProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(progressTimer);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 40);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(progressTimer);
+    };
+  }, []);
+
+  // Loading Screen Component
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-accent/5 to-background">
+        <div className="text-center space-y-8 max-w-md mx-auto px-4">
+          {/* Animated Logo */}
+          <div className="relative">
+            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center animate-pulse shadow-2xl">
+              <span className="text-2xl font-bold text-white">VG</span>
+            </div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-xl animate-pulse"></div>
+          </div>
+
+          {/* Loading Text */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-primary animate-fade-in">
+              Veredian Growth
+            </h2>
+            <p className="text-muted-foreground animate-slide-up">
+              Preparing your income potential journey...
+            </p>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-100 ease-out rounded-full"
+              style={{ width: `${loadingProgress}%` }}
+            ></div>
+          </div>
+
+          {/* Loading Percentage */}
+          <div className="text-sm text-muted-foreground font-medium">
+            {loadingProgress}%
+          </div>
+
+          {/* Rotating Loader */}
+          <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto" />
+        </div>
+      </div>
+    );
+  }
+
   const benefits = [
     {
       icon: Users,
@@ -315,73 +386,189 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      {/* Enhanced Testimonials Section with Animations */}
+      <section className="py-16 bg-background relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-primary rounded-full animate-float" style={{animationDelay: '0s'}}></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-accent rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-primary rounded-full animate-float" style={{animationDelay: '4s'}}></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Success Stories from Our Community
             </h2>
             <p className="text-xl text-muted-foreground">
               Real people, real results, real transformations.
             </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-4 rounded-full"></div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* Enhanced Testimonial Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
+              <Card 
+                key={index} 
+                className="border-0 shadow-card hover:shadow-glow transition-all duration-500 hover:scale-105 transform bg-white/80 backdrop-blur-sm relative overflow-hidden group animate-fade-in"
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                  animationFillMode: 'forwards'
+                }}
+              >
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Floating Quote Icon */}
+                <div className="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-2xl opacity-10 group-hover:opacity-30 transition-opacity duration-500">
+                  "
+                </div>
+
+                <CardContent className="p-8 relative z-10">
+                  {/* Animated Star Rating */}
+                  <div className="flex items-center mb-6 space-x-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                      <Star 
+                        key={i} 
+                        className="h-5 w-5 fill-yellow-400 text-yellow-400 animate-pulse transition-transform hover:scale-125" 
+                        style={{animationDelay: `${i * 0.1}s`}}
+                      />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-4 italic">
-                    "{testimonial.quote}"
-                  </p>
-                  <p className="font-semibold text-primary">{testimonial.name}</p>
+
+                  {/* Quote with Enhanced Typography */}
+                  <blockquote className="text-muted-foreground mb-6 italic text-lg leading-relaxed font-medium relative">
+                    <span className="text-4xl text-primary/20 absolute -top-2 -left-2">"</span>
+                    {testimonial.quote}
+                    <span className="text-4xl text-primary/20 absolute -bottom-6 -right-2">"</span>
+                  </blockquote>
+
+                  {/* Author with Avatar Placeholder */}
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-primary text-lg">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground">Verified Member</p>
+                    </div>
+                  </div>
+
+                  {/* Success Indicator */}
+                  <div className="mt-4 flex items-center space-x-2 text-green-600">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium">Earning Member</span>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-8">
-            <Button variant="accent" size="lg" asChild>
-              <Link to="/masterclass">Join Them Today</Link>
-            </Button>
+
+          {/* Enhanced CTA */}
+          <div className="text-center mt-12 animate-slide-up">
+            <div className="inline-block p-1 bg-gradient-to-r from-primary to-accent rounded-full">
+              <Button variant="accent" size="lg" asChild className="bg-white text-primary hover:bg-white/90 transition-all duration-300 hover:scale-105">
+                <Link to="/masterclass">
+                  Join Them Today
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Roadmap Preview */}
-      <section className="py-16 subtle-gradient">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      {/* Enhanced Roadmap Preview with Advanced Animations */}
+      <section className="py-20 subtle-gradient relative overflow-hidden">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_25%_25%,rgba(var(--primary),0.1)_0%,transparent_50%)]"></div>
+          <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_75%_75%,rgba(var(--accent),0.1)_0%,transparent_50%)]"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Your Journey to Success
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-6">
               A proven 5-step process that transforms beginners into earners.
             </p>
+            <div className="w-32 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-4">
-              {roadmapSteps.map((step, index) => (
-                <div key={index} className="flex flex-col items-center text-center group">
-                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <step.icon className="h-10 w-10 text-primary" />
+
+          <div className="max-w-6xl mx-auto">
+            {/* Enhanced Interactive Roadmap */}
+            <div className="relative">
+              {/* Connection Lines for Desktop */}
+              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary transform -translate-y-1/2 opacity-30"></div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4">
+                {roadmapSteps.map((step, index) => (
+                  <div 
+                    key={index} 
+                    className="flex flex-col items-center text-center group relative animate-scale-in"
+                    style={{
+                      animationDelay: `${index * 0.3}s`,
+                      animationFillMode: 'forwards'
+                    }}
+                  >
+                    {/* Pulsing Ring Effect */}
+                    <div className="absolute top-0 w-24 h-24 bg-primary/20 rounded-full animate-ping opacity-0 group-hover:opacity-30"></div>
+                    
+                    {/* Main Icon Container */}
+                    <div className="relative w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mb-6 group-hover:scale-125 transition-all duration-500 shadow-lg hover:shadow-glow cursor-pointer">
+                      <step.icon className="h-10 w-10 text-white transition-transform duration-300 group-hover:rotate-12" />
+                      
+                      {/* Step Number Badge */}
+                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-white text-primary rounded-full flex items-center justify-center text-xs font-bold shadow-md">
+                        {index + 1}
+                      </div>
+
+                      {/* Progress Ring */}
+                      <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-white/50 transition-all duration-500"></div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <h3 className="text-xl font-bold text-primary group-hover:text-accent transition-colors duration-300">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {/* Default Visible Content */}
+                    <div className="space-y-2 group-hover:opacity-0 transition-opacity duration-300">
+                      <h3 className="text-lg font-semibold text-primary">{step.title}</h3>
+                      <p className="text-sm text-muted-foreground">{step.description}</p>
+                    </div>
+
+                    {/* Connection Arrow for Mobile */}
+                    {index < roadmapSteps.length - 1 && (
+                      <div className="md:hidden w-0.5 h-8 bg-gradient-to-b from-primary to-accent mt-4 opacity-50"></div>
+                    )}
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground">{step.description}</p>
-                  {index < roadmapSteps.length - 1 && (
-                    <ArrowRight className="hidden md:block h-6 w-6 text-muted-foreground mt-4 absolute translate-x-16" />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/roadmap">See Full Roadmap</Link>
-            </Button>
+
+          {/* Enhanced CTA */}
+          <div className="text-center mt-16 animate-slide-up">
+            <div className="space-y-4">
+              <p className="text-muted-foreground">Ready to start your journey?</p>
+              <div className="inline-block p-1 bg-gradient-to-r from-primary to-accent rounded-full animate-glow">
+                <Button variant="outline" size="lg" asChild className="bg-white hover:bg-white/90 transition-all duration-300 hover:scale-105">
+                  <Link to="/roadmap">
+                    See Full Roadmap
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
