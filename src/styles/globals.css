@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
+/* Removed Tailwind and custom at-rules for pure CSS compatibility */
+@import "tw-animate-cs";
 
 :root {
   --background: oklch(1 0 0);
@@ -76,8 +72,12 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+@theme inline 
   --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+/* Removed @theme at-rule for pure CSS compatibility */
+:root { --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -114,12 +114,12 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+/* Replaced @layer and @apply with standard CSS */
+* {
+  border-color: var(--border);
+  outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
 }

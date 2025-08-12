@@ -9,18 +9,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl hover:scale-105",
+        default: "bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow-lg hover:shadow-xl hover:scale-105",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background text-foreground shadow-lg hover:shadow-xl hover:scale-105",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        hero: "hero-gradient text-white hover:scale-105 shadow-elegant hover:shadow-glow font-semibold",
-        accent: "bg-accent text-accent-foreground hover:bg-accent-light hover:scale-105 shadow-lg",
-        glass: "glass-effect text-white hover:bg-white/20 border border-white/20",
+          "bg-secondary text-secondary-foreground shadow-lg hover:shadow-xl hover:scale-105",
+        ghost: "bg-background text-foreground shadow-lg hover:shadow-xl hover:scale-105",
+        link: "text-primary underline-offset-4",
+        hero: "hero-gradient text-white shadow-elegant font-semibold",
+        accent: "bg-accent text-accent-foreground shadow-lg hover:shadow-xl hover:scale-105",
+        glass: "glass-effect text-white border border-white/20",
       },
       size: {
         default: "h-10 px-4 py-2",

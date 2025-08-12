@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { supabase } from "@/lib/supabaseClient";
+import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -22,6 +24,7 @@ import {
 } from "lucide-react";
 
 const MasterclassDetails = () => {
+  const { toast } = useToast();
   const { id } = useParams();
   const [currentStep, setCurrentStep] = useState<'details' | 'register' | 'payment'>('details');
   const [formData, setFormData] = useState({
@@ -33,6 +36,7 @@ const MasterclassDetails = () => {
   // Transaction ID state for manual confirmation
   const [showTxnForm, setShowTxnForm] = useState(false);
   const [txnId, setTxnId] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Payment handler
   const handleUPIPayment = () => {
@@ -56,10 +60,10 @@ const MasterclassDetails = () => {
     duration: "6 Days (90 min/day)",
     price: 200,
     originalPrice: 499,
-    slots: 50,
+    slots: 2,
     instructor: "Your Name",
-    rating: 5.0,
-    reviews: 100,
+    rating: 4.9,
+    reviews: 3475,
     learningOutcomes: [
       "Beginner-friendly digital income paths",
       "Day-by-day roadmap for clarity and action",
@@ -95,11 +99,62 @@ const MasterclassDetails = () => {
     );
   }
 
-  const handleRegistration = () => {
-    if (formData.name && formData.email && formData.phone) {
-      setCurrentStep('payment');
+  const handleRegistration = async () => {
+    if (!formData.name || !formData.email || !formData.phone) {
+      toast({
+        title: "Incomplete Form",
+        description: "Please fill in all the required fields.",
+        variant: "destructive",
+      });
+      return;
     }
-  };
+
+    const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid Email Address",
+        description: "Please enter a valid email format.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const registrationData = {
+        full_name: formData.name,
+        email: formData.email,
+        phone_number: formData.phone,
+      };
+
+      const { error } = await supabase
+        .from('contacts')
+        .insert([registrationData])
+        .select()
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Registration Successful!",
+        description: "Please proceed to the payment step.",
+      });
+
+      setCurrentStep('payment');
+
+    } catch (error) {
+      toast({
+        title: "Registration Failed",
+        description: error instanceof Error ? error.message : "An unknown error occurred. Please try again.",
+        variant: "destructive",
+      });
+      console.error('Error saving registration data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };;
 
   const renderDetailsView = () => (
     <div className="space-y-8">
@@ -120,20 +175,7 @@ const MasterclassDetails = () => {
 
       {/* Key Details */}
       <div className="grid md:grid-cols-3 gap-6">
-        <Card className="text-center">
-          <CardContent className="p-6">
-            <Calendar className="h-8 w-8 text-primary mx-auto mb-2" />
-            <div className="font-semibold">
-              {new Date(masterclass.date).toLocaleDateString('en-IN', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </div>
-            <div className="text-sm text-gray-600">{masterclass.time}</div>
-          </CardContent>
-        </Card>
+        
         <Card className="text-center">
           <CardContent className="p-6">
             <Clock className="h-8 w-8 text-primary mx-auto mb-2" />
@@ -254,6 +296,8 @@ const MasterclassDetails = () => {
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             className="pl-10"
+            pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+            title="Please enter a valid email address."
           />
         </div>
         <div className="relative">
@@ -262,7 +306,10 @@ const MasterclassDetails = () => {
             type="tel"
             placeholder="Phone Number"
             value={formData.phone}
-            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+            onChange={(e) => {
+              const numericValue = e.target.value.replace(/\D/g, '');
+              setFormData({...formData, phone: numericValue});
+            }}
             className="pl-10"
           />
         </div>
@@ -311,21 +358,7 @@ const MasterclassDetails = () => {
           </div>
         </CardContent>
       </Card>
-
-      <div className="space-y-3 text-sm text-gray-600">
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-green-500" />
-          <span>30-day money-back guarantee</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-green-500" />
-          <span>Lifetime access to resources</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-4 w-4 text-green-500" />
-        </div>
-      </div>
-
+\
 
       {!showTxnForm && (
         <Button 
@@ -347,7 +380,7 @@ const MasterclassDetails = () => {
             placeholder="Enter UPI Transaction ID (UTR/TXN ID)"
             value={txnId}
             onChange={e => setTxnId(e.target.value)}
-          />
+            />
           <Button
             className="w-full bg-green-600 text-white"
             size="lg"
