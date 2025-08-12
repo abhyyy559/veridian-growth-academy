@@ -101,15 +101,19 @@ const FAQ = () => {
             personalized answers to your specific questions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="hero" className="text-lg px-8 py-6">
-              <MessageCircle className="mr-2 h-6 w-6" />
-              Chat on WhatsApp
-              <ExternalLink className="ml-2 h-4 w-4" />
+            <Button size="lg" variant="hero" className="text-lg px-8 py-6" asChild>
+              <a href="https://wa.me/919652702916" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 h-6 w-6" />
+                Chat on WhatsApp
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-              <MessageCircle className="mr-2 h-6 w-6" />
-              Message on Instagram
-              <ExternalLink className="ml-2 h-4 w-4" />
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+              <a href="https://instagram.com/verediangrowth" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="mr-2 h-6 w-6" />
+                Message on Instagram
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-4">

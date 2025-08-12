@@ -34,7 +34,6 @@ const Masterclass = () => {
       id: 1,
       title: "Unlock Your Income Potential: 6-Day Live Masterclass",
       description: "A transformational 6-day, 100% live masterclass for anyone ready to start earning online — even with zero experience. Just 90 minutes a day, packed with clarity, action, and real results.",
-      date: "2025-08-01",
       time: "7:00 PM – 8:30 PM (IST)",
       paymentLink: "#",
       image: "/api/placeholder/400/250",
@@ -240,8 +239,8 @@ const Masterclass = () => {
                 <CardHeader className="p-0 mb-4">
                   <CardTitle className="text-2xl text-center mb-2">{masterclass.title}</CardTitle>
                   <div className="flex justify-center items-center gap-4 text-sm text-muted-foreground mb-2">
-                    <Calendar className="h-4 w-4" />
-                    {new Date(masterclass.date).toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric' })}
+                  
+
                     <Clock className="h-4 w-4 ml-4" />
                     {masterclass.time}
                   </div>
@@ -252,7 +251,7 @@ const Masterclass = () => {
                       <li key={i}>{h}</li>
                     ))}
                   </ul>
-                  <Button className="w-full bg-primary hover:bg-primary-dark text-white text-base py-3" asChild>
+                  <Button className="w-full bg-green-600 text-white px-8 py-3 " asChild>
                     <Link to={`/masterclass/${masterclass.id}`}>
                       Register Now
                       <ArrowRight className="ml-2 h-4 w-4" />

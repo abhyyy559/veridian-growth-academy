@@ -24,8 +24,8 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">V</span>
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <span className="text-primary font-bold text-lg">V</span>
             </div>
             <span className="text-foreground font-bold text-xl">
               Veredian Growth
@@ -47,7 +47,7 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="default" size="sm" className="bg-primary hover:bg-primary-dark text-white" asChild>
+            <Button variant="default" size="sm" className="bg-primary hero-gradient  hover:bg-primary-dark text-white" asChild>
               <Link to="/masterclass">Join Masterclass</Link>
             </Button>
           </div>

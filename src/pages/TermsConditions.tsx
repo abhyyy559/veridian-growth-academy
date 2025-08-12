@@ -128,8 +128,8 @@ const TermsConditions = () => {
             </p>
             <div className="bg-muted/50 p-4 rounded-lg mt-4">
               <p className="text-muted-foreground">
-                Email: legal@verediangrowth.com<br />
-                WhatsApp: +91 98765 43210<br />
+                Email: veridiangrowthh@gmail.com<br />
+                WhatsApp: +91 9652702916<br />
                 Address: Mumbai, Maharashtra, India
               </p>
             </div>
