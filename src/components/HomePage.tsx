@@ -150,6 +150,7 @@ const HomePage = () => {
                 </Button>
               </motion.div>
             </div>
+<<<<<<< HEAD
             <div className="relative flex items-center justify-center min-h-[340px]">
               {/* Premium animated hero illustration */}
               <motion.div
@@ -255,6 +256,159 @@ const HomePage = () => {
                   </motion.div>
                 </motion.div>
               </motion.div>
+=======
+            <div className="relative">
+              <div className="hero-gradient rounded-3xl p-8 text-white relative overflow-hidden animate-glow shadow-2xl">
+                {/* Enhanced Background Grid */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
+                  <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.05)_0%,transparent_50%)]"></div>
+                </div>
+
+                {/* Floating Success Icons */}
+                <div className="absolute top-6 left-8 animate-float bg-white/10 rounded-full p-2 backdrop-blur-sm" style={{animationDelay: '0s'}}>
+                  <div className="text-xl">💰</div>
+                </div>
+                <div className="absolute top-12 right-12 animate-float bg-white/15 rounded-full p-2 backdrop-blur-sm" style={{animationDelay: '1.5s'}}>
+                  <div className="text-lg">🚀</div>
+                </div>
+                <div className="absolute bottom-20 right-8 animate-float bg-white/10 rounded-full p-2 backdrop-blur-sm" style={{animationDelay: '3s'}}>
+                  <div className="text-xl">⭐</div>
+                </div>
+                
+                {/* Main Content */}
+                <div className="relative z-10 space-y-6">
+                  {/* Header Badge */}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium animate-pulse border border-white/20">
+                      ⚡ Live Earnings Tracker
+                    </div>
+                    <div className="bg-green-400/20 backdrop-blur-sm text-green-100 px-3 py-1 rounded-full text-xs font-medium border border-green-400/30">
+                      95% Success Rate
+                    </div>
+                  </div>
+                  
+                  {/* Income Growth Visualization */}
+                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-white">Monthly Growth</h3>
+                      <div className="text-2xl">📊</div>
+                    </div>
+                    
+                    {/* Enhanced Progress Bars */}
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="text-sm text-white/90 w-16">Month 1</div>
+                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden shadow-inner">
+                          <div className="h-full bg-gradient-to-r from-green-400 to-green-300 rounded-full animate-[slide-in-right_1.5s_ease-out] shadow-lg" style={{width: '35%'}}></div>
+                        </div>
+                        <div className="text-sm text-white font-semibold w-12">₹15k</div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="text-sm text-white/90 w-16">Month 2</div>
+                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden shadow-inner">
+                          <div className="h-full bg-gradient-to-r from-green-400 to-emerald-300 rounded-full animate-[slide-in-right_2s_ease-out] shadow-lg" style={{width: '65%'}}></div>
+                        </div>
+                        <div className="text-sm text-white font-semibold w-12">₹35k</div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="text-sm text-white/90 w-16">Month 3</div>
+                        <div className="flex-1 h-3 bg-white/10 rounded-full overflow-hidden shadow-inner">
+                          <div className="h-full bg-gradient-to-r from-green-400 to-green-200 rounded-full animate-[slide-in-right_2.5s_ease-out] shadow-lg" style={{width: '95%'}}></div>
+                        </div>
+                        <div className="text-sm text-white font-semibold w-12">₹50k+</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Success Metrics */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center">
+                      <div className="text-2xl font-bold text-green-200">1000+</div>
+                      <div className="text-xs text-white/80">Active Members</div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-center">
+                      <div className="text-2xl font-bold text-green-200">24/7</div>
+                      <div className="text-xs text-white/80">Support</div>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-4 left-4">
+                    <div className="bg-green-400/20 backdrop-blur-sm text-green-100 px-4 py-2 rounded-full text-sm font-medium animate-pulse border border-green-400/30" style={{animationDelay: '1s'}}>
+                      🎯 Proven System
+                    </div>
+                  </div>
+                </div>
+
+                {/* Supabase Dashboard Features */}
+                <div className="absolute inset-0">
+                  {/* Database Status Indicators */}
+                  <div className="absolute top-6 right-6 flex flex-col space-y-2">
+                    <div className="bg-green-500/20 backdrop-blur-sm border border-green-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-green-200 font-medium">Database Online</span>
+                    </div>
+                    <div className="bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                      <span className="text-xs text-blue-200 font-medium">Auth Active</span>
+                    </div>
+                    <div className="bg-purple-500/20 backdrop-blur-sm border border-purple-400/30 rounded-lg p-2 flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                      <span className="text-xs text-purple-200 font-medium">Realtime</span>
+                    </div>
+                  </div>
+
+                  {/* Supabase Logo Animation */}
+                  <div className="absolute top-8 left-6">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-full p-3 border border-white/20 animate-float">
+                      <svg className="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Real-time Data Stream */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm text-white/90 font-medium">⚡ Live Activity</span>
+                        <div className="flex space-x-1">
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse"></div>
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                          <div className="w-1 h-4 bg-green-400 rounded animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                          User registered • 2s ago
+                        </div>
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                          Profile updated • 5s ago
+                        </div>
+                        <div className="flex items-center text-xs text-white/70">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mr-2"></div>
+                          Data synced • 8s ago
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Code Snippets */}
+                  <div className="absolute top-1/3 right-8 animate-float bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/10 font-mono text-xs text-green-300" style={{animationDelay: '1s'}}>
+                    <div>supabase.auth</div>
+                    <div className="text-white/50">.signIn()</div>
+                  </div>
+                  
+                  <div className="absolute bottom-1/3 right-12 animate-float bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/10 font-mono text-xs text-blue-300" style={{animationDelay: '2s'}}>
+                    <div>supabase.from</div>
+                    <div className="text-white/50">('profiles')</div>
+                  </div>
+                </div>
+              </div>
+>>>>>>> 954a66a9c9181b771d79883f17b16f684b5113ea
             </div>
           </div>
         </motion.div>
