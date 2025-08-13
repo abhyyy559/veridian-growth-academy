@@ -20,7 +20,9 @@ import {
   Phone,
   CheckCircle,
   Star,
-  ArrowLeft
+  ArrowLeft,
+  QrCode,
+  CreditCard
 } from "lucide-react";
 
 const MasterclassDetails = () => {
@@ -37,13 +39,26 @@ const MasterclassDetails = () => {
   const [showTxnForm, setShowTxnForm] = useState(false);
   const [txnId, setTxnId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'manual' | 'qrcode'>('upi');
 
-  // Payment handler
+  // Payment handlers
   const handleUPIPayment = () => {
     // UPI link
-    const upiLink = `upi://pay?pa=9652702916@ybl&pn=Payment+Receiver&am=${masterclass.price}&cu=INR`;
+    const upiLink = `upi://pay?pa=9652702916@ybl&pn=Payment%20Receiver&am=${masterclass.price}&cu=INR`;
     window.open(upiLink, '_blank');
     // Show transaction ID form after payment
+    setShowTxnForm(true);
+  };
+
+  const handleManualPayment = () => {
+    // Show transaction ID form for manual payment
+    setPaymentMethod('manual');
+    setShowTxnForm(true);
+  };
+
+  const handleQRCodePayment = () => {
+    // Show QR code for payment
+    setPaymentMethod('qrcode');
     setShowTxnForm(true);
   };
 
@@ -129,9 +144,7 @@ const MasterclassDetails = () => {
 
       const { error } = await supabase
         .from('contacts')
-        .insert([registrationData])
-        .select()
-        .single();
+        .upsert(registrationData, { onConflict: 'email' });
 
       if (error) {
         throw error;
@@ -361,26 +374,96 @@ const MasterclassDetails = () => {
 \
 
       {!showTxnForm && (
-        <Button 
-          className="w-full bg-primary hover:bg-primary-dark text-white" 
-          size="lg"
-          onClick={handleUPIPayment}
-        >
-          Pay ₹{masterclass.price} via UPI & Join Now
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
+        <div className="space-y-3">
+          <Button 
+            className="w-full bg-primary hover:bg-primary-dark text-white" 
+            size="lg"
+            onClick={handleUPIPayment}
+          >
+            Pay ₹{masterclass.price} via UPI
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          
+          <Button 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white" 
+            size="lg"
+            onClick={handleQRCodePayment}
+          >
+            Pay via QR Code Scanner (Recommended)
+            <QrCode className="ml-2 h-5 w-5" />
+          </Button>
+          
+          <Button 
+            className="w-full bg-green-600 hover:bg-green-700 text-white" 
+            size="lg"
+            onClick={handleManualPayment}
+          >
+            Enter Payment Details Manually
+            <CreditCard className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
       )}
 
       {showTxnForm && (
         <div className="mt-6 p-4 border rounded bg-gray-50">
-          <h3 className="text-lg font-semibold mb-2">After payment, enter your UPI Transaction/Reference ID below:</h3>
+          {paymentMethod === 'qrcode' && (
+            <div className="text-center mb-4">
+              <h3 className="text-lg font-semibold mb-2">Scan QR Code to Pay</h3>
+              <div className="bg-white p-4 inline-block rounded-lg border mb-2">
+                {/* QR Code Image */}
+                <img 
+                  src="/urcode.png" 
+                  alt="QR Code for UPI payment to 9652702916@ybl"
+                  className="w-48 h-48"
+                />
+              </div>
+              <p className="text-sm font-medium">UPI ID: 9652702916@ybl</p>
+              <p className="text-sm text-gray-600 mt-1">Amount: ₹{masterclass.price}</p>
+              
+              <div className="mt-4 text-left bg-blue-50 p-3 rounded-lg border border-blue-100">
+                <h4 className="font-medium text-blue-800 mb-2">Steps to complete payment:</h4>
+                <ol className="list-decimal list-inside text-sm space-y-1 text-gray-700">
+                  <li>Open your UPI payment app (Google Pay, PhonePe, Paytm, etc.)</li>
+                  <li>Use the scan QR option in your app</li>
+                  <li>Scan the QR code shown above</li>
+                  <li>Verify the UPI ID (9652702916@ybl) and amount</li>
+                  <li>Complete the payment in your app</li>
+                  <li>Copy the UTR/Transaction ID from your payment app</li>
+                  <li>Paste the ID in the field below and submit</li>
+                </ol>
+              </div>
+            </div>
+          )}
+          
+          <h3 className="text-lg font-semibold mb-2">
+            {paymentMethod === 'upi' && "After payment, enter your UPI Transaction/Reference ID below:"}
+            {paymentMethod === 'manual' && "Enter your payment details below:"}
+            {paymentMethod === 'qrcode' && "After scanning and paying, enter your Transaction ID below:"}
+          </h3>
+          
+          {paymentMethod === 'manual' && (
+            <div className="mb-4 text-left bg-green-50 p-3 rounded-lg border border-green-100">
+              <h4 className="font-medium text-green-800 mb-2">Steps to complete manual payment:</h4>
+              <ol className="list-decimal list-inside text-sm space-y-1 text-gray-700">
+                <li>Copy the UPI ID: <span className="font-medium">9652702916@ybl</span></li>
+                <li>Open your preferred UPI payment app</li>
+                <li>Paste the UPI ID in the payment section</li>
+                <li>Enter the amount: ₹{masterclass.price}</li>
+                <li>Complete the payment in your app</li>
+                <li>Copy the UTR/Transaction ID from your payment confirmation</li>
+                <li>Paste the ID in the field below and submit</li>
+              </ol>
+            </div>
+          )}
+          
           <input
             type="text"
             className="w-full p-2 border rounded mb-2"
-            placeholder="Enter UPI Transaction ID (UTR/TXN ID)"
+            placeholder={paymentMethod === 'manual' ? "Enter Transaction ID (UTR/TXN ID)" : "Enter Transaction ID (UTR/TXN ID)"}
             value={txnId}
             onChange={e => setTxnId(e.target.value)}
-            />
+          />
+          
           <Button
             className="w-full bg-green-600 text-white"
             size="lg"
@@ -389,9 +472,32 @@ const MasterclassDetails = () => {
               window.location.href = '/paymentsuccess';
             }}
           >
-            Submit Transaction ID
+            Submit Payment Details
           </Button>
+          
           <p className="text-xs text-gray-500 mt-2">We will verify your payment and contact you soon.</p>
+          
+          <div className="mt-3 p-3 bg-yellow-50 border border-yellow-100 rounded-lg text-sm text-yellow-800">
+            <p className="font-medium">Important Payment Notes:</p>
+            <ul className="list-disc list-inside mt-1 space-y-1 text-xs">
+              <li>Please wait patiently after making the payment. It may take a few moments to process.</li>
+              <li>If your payment is declined, please try another payment method.</li>
+              <li>Make sure to copy the correct transaction ID from your payment app.</li>
+              <li>For any payment issues, please contact our support team.</li>
+            </ul>
+          </div>
+          
+          {/* Option to change payment method */}
+          <Button 
+            variant="ghost" 
+            className="w-full mt-2 text-sm" 
+            onClick={() => {
+              setShowTxnForm(false);
+              setTxnId('');
+            }}
+          >
+            Choose a different payment method
+          </Button>
         </div>
       )}
       
@@ -405,7 +511,7 @@ const MasterclassDetails = () => {
       </Button>
 
       <p className="text-xs text-center text-gray-500">
-        Secure payment via UPI • Enter your transaction ID after payment
+        Secure payment options • Enter your transaction details after payment
       </p>
     </div>
   );
