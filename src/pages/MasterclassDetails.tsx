@@ -144,7 +144,9 @@ const MasterclassDetails = () => {
 
       const { error } = await supabase
         .from('contacts')
-        .upsert(registrationData, { onConflict: 'email' });
+        .insert([registrationData])
+        .select()
+        .single();
 
       if (error) {
         throw error;
